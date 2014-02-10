@@ -13,3 +13,9 @@ Orekit embodies a great deal of orbital mechanics knowledge, much of it specific
 [Project Persephone](http://www.projectpersephone.org) sponsors the development of SpriteOrbits for the KickSat mission, currently scheduled for launch in 2014Q1 on [SpaceX CRS-3](https://en.wikipedia.org/wiki/SpaceX_CRS-3) as a participant in [NASA's Educational Launch of Nanosatellites (ELaNa) initiative](http://www.nasa.gov/mission_pages/smallsats/elana/).
 
 [Metaworx](http://www.metawerx.net/) co-sponsors SpriteOrbits by offering Java web hosting with full tech support.
+
+![KickSat](http://zacinaction.github.io/kicksat/kicksatlogo_600.png)
+
+![Orekit](https://www.orekit.org/img/white-orekit-logo.png)
+
+![Metawerx](http://jp2.metawerx.net/images/logo/logo_giant_colored_404.png)

@@ -145,8 +145,11 @@ public class SpriteProp {
 
             final double propagationDuration = 0.2;  // days after release
             final double step                = 60.0; // seconds
-            out = new PrintStream(new File(userDir, "sprites-prop.txt"));
+            //out = new PrintStream(new File(userDir, "sprites-prop.txt"));
+            out = new PrintStream(new File(userDir, "orbits.json"));
+            out.format(Locale.US, "[");
             spriteProp.run(out, propagationDuration, step, utc);
+            out.format(Locale.US, "]");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -300,7 +303,7 @@ public class SpriteProp {
 
 	    final AbsoluteDate start = spritesPropagators.get(0).getInitialState().getDate();
 	    final AbsoluteDate end   = start.shiftedBy(propagationDuration * Constants.JULIAN_DAY);
-        out.format(Locale.US, "# file generated on %s%n",
+        /*out.format(Locale.US, "# file generated on %s%n",
                    new AbsoluteDate(new Date(), utc).toString(utc));
         out.format(Locale.US, "# propagating %d sprites from %s to %s%n",
                    spritesPropagators.size(), start.toString(utc), end.toString(utc));
@@ -312,6 +315,7 @@ public class SpriteProp {
         out.format(Locale.US, "# column 3i+3: sprite i geodetic latitude (degrees)%n");
         out.format(Locale.US, "# column 3i+4: sprite i geodetic longitude (degrees)%n");
         out.format(Locale.US, "# column 3i+5: sprite i geodetic altitude (meters)%n");
+        */
 
         // in order to speed up computation, we let the numerical propagator choose its
         // steps, and create ephemerides, then we will use the ephemerides with fixed
@@ -320,12 +324,19 @@ public class SpriteProp {
         for (final Propagator spritePropagator : spritesPropagators) {
             spritePropagator.setEphemerisMode();
             spritePropagator.propagate(end);
-            ephemerides.add(spritePropagator.getGeneratedEphemeris());
+              ephemerides.add(spritePropagator.getGeneratedEphemeris());
         }
 
+        boolean firstTime = true;
         for (AbsoluteDate date = start; date.compareTo(end) < 0; date = date.shiftedBy(step)) {
+            if(!firstTime){
+            	out.format(Locale.US, ",");
+            }
+            else{
+            	firstTime = false;
+            }
 
-            out.format(Locale.US, "%s %9.1f", date.toString(utc), date.durationFrom(start));
+            /*out.format(Locale.US, "%s %9.1f", date.toString(utc), date.durationFrom(start));
 
             final GeodeticPoint kickSatGP = geodeticPosition(kickSatPropagator, date);
             out.format(Locale.US, " %8.3f %8.3f %8.1f",
@@ -340,7 +351,31 @@ public class SpriteProp {
                            FastMath.toDegrees(spriteGP.getLongitude()),
                            spriteGP.getAltitude());
             }
+            */
+        	out.format(Locale.US, "{\"date\":\"%s\",\"offset\":%.1f,", date.toString(utc), date.durationFrom(start));
 
+            final GeodeticPoint kickSatGP = geodeticPosition(kickSatPropagator, date);
+            out.format(Locale.US, "\"kicksat\":{\"lat\":%.3f,\"lng\":%.3f,\"alt\":%.1f},",
+                       FastMath.toDegrees(kickSatGP.getLatitude()),
+                       FastMath.toDegrees(kickSatGP.getLongitude()),
+                       kickSatGP.getAltitude());
+
+            out.format(Locale.US, "\"sprites\":[");
+            boolean firstSprite = true;
+            for (final Propagator ephemeride : ephemerides) {
+                final GeodeticPoint spriteGP = geodeticPosition(ephemeride, date);
+                if(!firstSprite){
+                	out.format(Locale.US, ",");
+                }
+                else{
+                	firstSprite = false;
+                }
+                out.format(Locale.US, "{\"lat\":%.3f,\"lng\":%.3f,\"alt\":%.1f}",
+                           FastMath.toDegrees(spriteGP.getLatitude()),
+                           FastMath.toDegrees(spriteGP.getLongitude()),
+                           spriteGP.getAltitude());
+            }
+            out.format(Locale.US, "]}");
             out.println();
 
         }

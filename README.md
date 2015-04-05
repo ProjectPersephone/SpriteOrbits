@@ -16,6 +16,6 @@ Orekit embodies a great deal of orbital mechanics knowledge, much of it specific
 
 ![KickSat](http://zacinaction.github.io/kicksat/kicksatlogo_600.png)
 
-![Orekit](https://www.orekit.org/img/white-orekit-logo.png)
+![Orekit](https://cloud.githubusercontent.com/assets/196385/6996772/71ac1984-dbd7-11e4-8238-d8dfda44d304.png)
 
 ![Metawerx](http://jp2.metawerx.net/images/logo/logo_giant_colored_404.png)

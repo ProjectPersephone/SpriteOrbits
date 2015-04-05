@@ -14,7 +14,7 @@ A project to provide an animation of SpriteOrbits [won the Denso IT Laboratory P
 
 [Project Persephone](http://www.projectpersephone.org) sponsors the development of SpriteOrbits for the KickSat 2 mission, a followon to the KickSat 1 mission that launched on [SpaceX CRS-3](https://en.wikipedia.org/wiki/SpaceX_CRS-3) as a participant in [NASA's Educational Launch of Nanosatellites (ELaNa) initiative](http://www.nasa.gov/mission_pages/smallsats/elana/).
 
-[Metaworx](http://www.metawerx.net/) co-sponsors SpriteOrbits by offering Java web hosting with full tech support.
+[Metawerx](http://www.metawerx.net/) co-sponsors SpriteOrbits by offering Java web hosting with full tech support.
 
 ![KickSat](http://zacinaction.github.io/kicksat/kicksatlogo_600.png)
 

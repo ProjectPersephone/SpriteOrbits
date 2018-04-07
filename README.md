@@ -20,4 +20,4 @@ A project to provide an animation of SpriteOrbits [won the Denso IT Laboratory P
 
 ![Orekit](https://cloud.githubusercontent.com/assets/196385/6996772/71ac1984-dbd7-11e4-8238-d8dfda44d304.png)
 
-![Metawerx](http://jp2.metawerx.net/images/logo/logo_giant_colored_404.png)
+![Metawerx](https://www.metawerx.net/images/logo/logo_giant_colored_404.png)

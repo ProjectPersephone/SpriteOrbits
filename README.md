@@ -16,7 +16,7 @@ A project to provide an animation of SpriteOrbits [won the Denso IT Laboratory P
 
 [Metawerx](http://www.metawerx.net/) co-sponsors SpriteOrbits by offering Java web hosting with full tech support.
 
-![KickSat](http://zacinaction.github.io/kicksat/kicksatlogo_600.png)
+![KickSat](http://kicksat.github.io/kicksatlogo_600.png)
 
 ![Orekit](https://cloud.githubusercontent.com/assets/196385/6996772/71ac1984-dbd7-11e4-8238-d8dfda44d304.png)
 

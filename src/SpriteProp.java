@@ -6,16 +6,16 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Date;
+// import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.math3.geometry.euclidean.threed.RotationOrder;
-import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
-import org.apache.commons.math3.ode.nonstiff.AdaptiveStepsizeIntegrator;
-import org.apache.commons.math3.ode.nonstiff.DormandPrince853Integrator;
-import org.apache.commons.math3.util.FastMath;
-import org.apache.commons.math3.util.MathUtils;
+import org.hipparchus.geometry.euclidean.threed.RotationOrder;
+import org.hipparchus.geometry.euclidean.threed.Vector3D;
+import org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator;
+import org.hipparchus.ode.nonstiff.DormandPrince853Integrator;
+import org.hipparchus.util.FastMath;
+import org.hipparchus.util.MathUtils;
 import org.orekit.attitudes.AttitudeProvider;
 import org.orekit.attitudes.CelestialBodyPointed;
 import org.orekit.attitudes.LofOffset;
@@ -26,9 +26,9 @@ import org.orekit.bodies.OneAxisEllipsoid;
 import org.orekit.data.DataProvidersManager;
 import org.orekit.data.ZipJarCrawler;
 import org.orekit.errors.OrekitException;
-import org.orekit.forces.SphericalSpacecraft;
+import org.orekit.forces.drag.IsotropicDrag; // import org.orekit.forces.SphericalSpacecraft;
 import org.orekit.forces.drag.DragForce;
-import org.orekit.forces.drag.HarrisPriester;
+import org.orekit.forces.drag.atmosphere.HarrisPriester;
 import org.orekit.forces.gravity.HolmesFeatherstoneAttractionModel;
 import org.orekit.forces.gravity.potential.GravityFieldFactory;
 import org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider;
@@ -123,8 +123,8 @@ public class SpriteProp {
                                                               utc);
 
             final CartesianOrbit kickSatOrbit =
-                    new CartesianOrbit(new PVCoordinates(new Vector3D(2998767.75, -6097451.56, -141448.92),    // position (m)
-                                                         new Vector3D(4323.077242, 1994.291706, 6000.774574)), // velocity (m/s)
+                    new CartesianOrbit(new PVCoordinates(new Vector3D (2998767.75, -6097451.56, -141448.92),    // position (m)
+                    									 new Vector3D (4323.077242, 1994.291706, 6000.774574)), // velocity (m/s)
                                        eme2000,  
                                        new AbsoluteDate(new DateComponents(2014, 55),      // year, day in year as NASA page above
                                                         new TimeComponents(16, 27, 6.921), // hour in day
@@ -279,7 +279,7 @@ public class SpriteProp {
 
          // add atmospheric drag force model
          propagator.addForceModel(new DragForce(new HarrisPriester(sun, earth),
-                                                new SphericalSpacecraft(crossSection, dragCoeff, 0.0, 0.0)));
+                                                new IsotropicDrag(crossSection, dragCoeff, 0.0, 0.0)));
 
          // set attitude mode
          propagator.setAttitudeProvider(attitudeProvider);
